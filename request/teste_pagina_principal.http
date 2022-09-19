@@ -1,0 +1,4 @@
+#Testar API do carrinho
+
+#Ver se aplicação está rodando
+Get http://localhost:8000/

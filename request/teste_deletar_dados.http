@@ -1,0 +1,24 @@
+#Testar API do carrinho
+
+#Deleção de usuario por id
+DELETE  http://localhost:8000/usuario/123
+
+###
+#Deleção de usuario por id incorreta (outro type)
+DELETE  http://localhost:8000/usuario/"umdoistres"
+
+###
+#Deleção de endereço por id
+DELETE http://localhost:8000/endereco/123
+
+###
+#Deleção de usuario por id incorreta (outro type)
+DELETE  http://localhost:8000/endereco/"umdoistres"
+
+###
+#Deleção de produto por id
+DELETE http://localhost:8000/produto/456/
+
+###
+#Deleção de produto por id incorreta (outro type
+DELETE http://localhost:8000/produto/dois/

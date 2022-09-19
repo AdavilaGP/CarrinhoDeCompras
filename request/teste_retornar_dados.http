@@ -1,0 +1,24 @@
+#Testar API do carrinho
+
+#Busca de usuario por id
+GET http://localhost:8000/usuario/123
+
+###
+#Busca de usuário incorreta (outro type)
+GET http://localhost:8000/usuario/"123"
+
+###
+#Busca de usuario por nome
+GET http://localhost:8000/usuario/nome/"nome"
+
+###
+#Busca de usuário incorreta (outro type- mix)
+GET http://localhost:8000/usuario/123@
+
+###
+#Busca de endereço por id de usuario
+GET http://localhost:8000/usuario/123/endereços/
+
+###
+#Busca de email via domínio
+GET http://localhost:8000/usuarios/emails/@gmail.com

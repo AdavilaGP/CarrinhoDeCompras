@@ -1,0 +1,239 @@
+#Testar API do carrinho
+
+#Cadastro de usuario
+POST http://localhost:8000/usuario/
+
+{
+    "id" : 123,
+    "nome" : "nome",
+    "email" : "nome@gmail.com",
+    "senha" : "456"
+}
+
+###
+#Cadastro de usuario incorreto
+POST http://localhost:8000/usuario/
+
+{
+    "nome" : "nome",
+    "email" : "nome@gmail.com",
+    "senha" : "456"
+}
+
+###
+#Cadastro de usuario incorreto
+POST http://localhost:8000/usuario/
+
+{
+    "id" : 123,
+    "email" : "nome@gmail.com",
+    "senha" : "456"
+}
+
+###
+#Cadastro de usuario incorreto
+POST http://localhost:8000/usuario/
+
+{
+    "id" : 123,
+    "nome" : "nome",
+    "senha" : "456"
+}
+
+###
+#Cadastro de usuario incorreto
+POST http://localhost:8000/usuario/
+
+{
+    "id" : 123,
+    "nome" : "nome",
+    "email" : "nome@gmail.com",
+}
+
+###
+#Cadastro de usuario incorreto (type id)
+POST http://localhost:8000/usuario/
+
+{
+    "id" : "umdoistrês",
+    "nome" : "nome",
+    "email" : "nome@gmail.com",
+    "senha" : "456"
+}
+
+###
+#Cadastro de usuario incorreto (email sem @)
+POST http://localhost:8000/usuario/
+
+{
+    "id" : 124,
+    "nome" : "nome",
+    "email" : "nome.gmail.com",
+    "senha" : "456"
+}
+###
+#Cadastro de usuario incorreto (email com caractere errado)
+POST http://localhost:8000/usuario/
+
+{
+    "id" : 122,
+    "nome" : "nome",
+    "email" : "nome.@gmail.com",
+    "senha" : "456"
+}
+
+###
+#Cadastro de usuario incorreto (senha menor que tamanho esperado)
+POST http://localhost:8000/usuario/
+
+{
+    "id" : 122,
+    "nome" : "nome",
+    "email" : "nome.@gmail.com",
+    "senha" : "45"
+}
+
+###
+#Cadastro de Endereço via ID do usuário
+POST http://localhost:8000/endereco/123
+
+{
+    "rua": "str",
+    "cep": "12345",
+    "cidade": "sao paulo",
+    "estado": "sp"
+}
+
+###
+#Cadastro de Endereço via ID do usuário incorreto (type id)
+POST http://localhost:8000/endereco/um
+
+{
+    "rua": "str",
+    "cep": "12345",
+    "cidade": "sao paulo",
+    "estado": "sp"
+}
+
+###
+#Cadastro de Endereço via ID do usuário incorreto (estrutura endereço)
+POST http://localhost:8000/endereco/123
+
+{
+    "cep": "12345",
+    "cidade": "sao paulo",
+    "estado": "sp"
+}
+
+###
+#Cadastro de Endereço via ID do usuário incorreto (estrutura endereço)
+POST http://localhost:8000/endereco/123
+
+{
+    "rua": "str",
+    "cidade": "sao paulo",
+    "estado": "sp"
+}
+
+###
+#Cadastro de Endereço via ID do usuário incorreto (estrutura endereço)
+POST http://localhost:8000/endereco/123
+
+{
+    "rua": "str",
+    "cep": "12345",
+    "estado": "sp"
+}
+
+###
+#Cadastro de Endereço via ID do usuário incorreto (estrutura endereço)
+POST http://localhost:8000/endereco/123
+
+{
+    "rua": "str",
+    "cep": "12345",
+    "cidade": "sao paulo",
+}
+
+###
+#Cadastro de produto
+POST http://localhost:8000/produto/
+
+{
+    "id": 456,
+    "nome": "carrinho",
+    "descricao": "carrinho de compras com nome criativo",
+    "preco": 689.90
+}
+
+###
+#Cadastro de produto incorreto (estrutura produto)
+POST http://localhost:8000/produto/
+
+{
+    "nome": "carrinho",
+    "descricao": "carrinho de compras com nome criativo",
+    "preco": 689.90
+}
+
+###
+#Cadastro de produto incorreto (estrutura produto)
+POST http://localhost:8000/produto/
+
+{
+    "id": 456,
+    "descricao": "carrinho de compras com nome criativo",
+    "preco": 689.90
+}
+
+###
+#Cadastro de produto incorreto (estrutura produto)
+POST http://localhost:8000/produto/
+
+{
+    "id": 456,
+    "nome": "carrinho",
+    "preco": 689.90
+}
+
+###
+#Cadastro de produto incorreto (estrutura produto)
+POST http://localhost:8000/produto/
+
+{
+    "id": 456,
+    "nome": "carrinho",
+    "descricao": "carrinho de compras com nome criativo",
+}
+###
+#Cadastro de produto incorreto (estrutura produto)
+POST http://localhost:8000/produto/
+
+{
+    "id": "quatro",
+    "nome": "carrinho",
+    "descricao": "carrinho de compras com nome criativo",
+    "preco": 689.90
+}
+
+###
+#Cadastro de produto incorreto (estrutura produto)
+POST http://localhost:8000/produto/
+
+{
+    "id": 456,
+    "nome": "carrinho",
+    "descricao": "carrinho de compras com nome criativo",
+    "preco": "umreal"
+}
+
+###
+#Cadastro de carrinho de compras
+POST http://localhost:8000/carrinho/
+
+{
+    "id_usuario": 123,
+    "id_produtos": [ 456, "carrinho", "carrinho de compras com nome criativo", 689.90],
+    "preco_total": 800.95,
+    "quantidade_de_produtos": 2
+}
