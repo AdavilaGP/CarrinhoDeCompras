@@ -1,8 +1,7 @@
 #Database provisória até a integração com o Banco de Dados acontecer
 
-from genericpath import exists
-
-
+# Criar a class Database(). Como chamar as funções da classe em Regras_de_uso?
+    
 db_usuarios = {} #[]
 db_produtos = {}
 db_enderecos = {}#{123: {"rua": "rua x", "cep": "03245", "cidade": "Sao Paulo", "estado": "SP"},123: {"rua": "rua y", "cep": "13245", "cidade": "Santa Catarina", "estado": "SC"}, 124: {"rua": "rua z", "cep": "23245", "cidade": "Santa Catarina", "estado": "SC"}}  #Não funciona com mais de um endereço..
@@ -83,11 +82,34 @@ def persistencia_produto_excluir_id(dado_produto):
     print("db", db_produtos)
     return
 
-def persistencia_cria_carrinho(novo_carrinho):
-    db_carrinhos[novo_carrinho["id"]] = novo_carrinho
+def persistencia_cria_carrinho(id_user, produto, novo_carrinho):
+    db_carrinhos[novo_carrinho["id_usuario"]] = novo_carrinho
     print("db carrinho", db_carrinhos)
     return 
 
-def persistencia_adiciona_ao_carrinho(id_produto):
-    #TODO terminar
+# senão adiciona produto ao carrinho e retornar OK
+def persistencia_adiciona_ao_carrinho(dado_produto, id_user, id_produto):
+    print(db_carrinhos)
+    db_carrinhos[id_user]["id_produtos"] = dado_produto
+    print(db_carrinhos[id_user])
+    return 
+
+def persistencia_busca_carrinho(dado_usuario):
+    carrinho = db_carrinhos[dado_usuario]
+    return carrinho
+
+def persistencia_item_valor(dado_id):
+    lista_item = []
+    lista_valor = []
+    for i in db_carrinhos[dado_id]:
+        if i == "preco_total":
+            lista_item.append(db_carrinhos[dado_id]["preco_total"])
+        if i == "quantidade_de_produtos":
+            lista_valor.append(db_carrinhos[dado_id]["quantidade_de_produtos"])
+    
+    lista_item_valor = [sum(lista_item), sum(lista_valor)]
+    return lista_item_valor
+
+def persistencia_deleta_carrinho(id_usuario):
+    db_carrinhos.pop(id_usuario, None)
     return

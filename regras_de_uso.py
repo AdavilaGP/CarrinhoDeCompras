@@ -12,7 +12,7 @@ def regras_usuario_cadastrar(usuario):
     if usuario["id"] in db.db_usuarios:
         return FALHA
 
-    eh_nova_conta = True # False for login pages
+    eh_nova_conta = True
     try:
         validation = validate_email(usuario["email"], check_deliverability=eh_nova_conta)
         usuario["email"] = validation.email
@@ -40,6 +40,7 @@ def regras_id_usuario(dado_id):
 
     return FALHA
 
+
 def regras_nome_usuario(dado_nome):
     pesquisa_nome_recebido = []
     dado_nome = dado_nome.strip(' " " ')
@@ -53,6 +54,7 @@ def regras_nome_usuario(dado_nome):
         return FALHA
     else:
         return pesquisa_nome_recebido
+
 
 def regras_id_usuario_delete(dado_id):
     if dado_id in db.db_usuarios:
@@ -93,12 +95,14 @@ def regras_cria_endereco_usuario(endereco, id_usuario):
 
     return OK
 
+
 def regras_id_endereco_delete(dado_endereco):
     if dado_endereco in db.db_enderecos:
         pesquisa_end = db.persistencia_endereco_excluir_id(dado_endereco)   
         return OK
 
     return FALHA
+
 
 def regras_cria_produto(produto):
     if produto["id"] in db.db_produtos:
@@ -109,6 +113,7 @@ def regras_cria_produto(produto):
     
         return OK
 
+
 def regras_produto_apaga(dado_produto):
     if dado_produto in db.db_produtos:
         pesquisa_produto = db.persistencia_produto_excluir_id(dado_produto)   
@@ -116,25 +121,57 @@ def regras_produto_apaga(dado_produto):
 
     return FALHA
 
-# Se não existir usuário com o id_usuario ou id_produto retornar falha, 
-# se não existir um carrinho vinculado ao usuário, crie o carrinho
-# e retornar OK
-# senão adiciona produto ao carrinho e retornar OK
-def regras_cria_carrinho(carrinho):
-    print(carrinho)
-    id_usuario = carrinho["id_usuario"]
-    id_produtos_geral = carrinho["id_produtos"]
-    id_produto = id_produtos_geral[0]
-    preco_total = carrinho["preco_total"]
-    quantidade_de_produtos = carrinho["quantidade_de_produtos"]
 
-    print(id_produto)
-    if id_usuario not in db.db_usuarios and id_produto not in db.db_produtos:
+def retornar_produto_cadastrado(id_produto):
+    if id_produto in db.db_produtos:
+
+        return db.db_produtos[id_produto]
+    else:
 
         return FALHA
-    if id_usuario not in db.db_usuarios:
-        carrinho = db.persistencia_cria_carrinho(carrinho)
+
+
+def regras_cria_carrinho(id_usuario, id_produto, carrinho):
+    produto = retornar_produto_cadastrado(id_produto)
+    print(carrinho)
+    print(produto)
+    if id_usuario not in db.db_usuarios or id_produto not in db.db_produtos:
+
+        return FALHA
+    elif id_usuario not in db.db_carrinhos:
+        carrinho = db.persistencia_cria_carrinho(id_usuario, id_produto, carrinho)
+
         return OK
     else:
-        carrinho = db.persistencia_adiciona_ao_carrinho(id_produto)
+        carrinho = db.persistencia_adiciona_ao_carrinho(produto, id_usuario, id_produto)
+        
         return OK
+
+
+def regras_retornar_carrinho(dado_usuario):
+    if dado_usuario in db.db_carrinhos:
+        carrinho_usuario = db.persistencia_busca_carrinho(dado_usuario)
+        print("carrinho_user", carrinho_usuario)
+        return carrinho_usuario
+    else:
+
+        return FALHA
+
+
+def regras_itens_valor_total(dado_id):
+    if dado_id in db. db_carrinhos:
+        lista_item_valor_total = db.persistencia_item_valor(dado_id)
+        
+        return lista_item_valor_total
+    else:
+        return FALHA
+
+
+def regras_deleta_carrinho(id_usuario):
+    if id_usuario in db.db_carrinhos:
+        deleta_carrinho = db.persistencia_deleta_carrinho(id_usuario)
+        
+        return OK
+    else:
+        
+        return FALHA

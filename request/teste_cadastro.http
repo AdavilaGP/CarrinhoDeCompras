@@ -229,11 +229,10 @@ POST http://localhost:8000/produto/
 
 ###
 #Cadastro de carrinho de compras
-POST http://localhost:8000/carrinho/
+POST http://localhost:8000/carrinho/123/456/
 
 {
     "id_usuario": 123,
-    "id_produtos": [ 456, "carrinho", "carrinho de compras com nome criativo", 689.90],
     "preco_total": 800.95,
     "quantidade_de_produtos": 2
 }

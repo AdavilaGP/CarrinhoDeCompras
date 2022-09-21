@@ -22,3 +22,11 @@ GET http://localhost:8000/usuario/123/endereços/
 ###
 #Busca de email via domínio
 GET http://localhost:8000/usuarios/emails/@gmail.com
+
+###
+#Buscar carrinho com id usuario
+GET http://localhost:8000/carrinho/123
+
+###
+#Buscar numero de itens e valor total do carrinho
+GET http://localhost:8000/carrinho/123/checkout

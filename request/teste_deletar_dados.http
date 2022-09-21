@@ -20,5 +20,9 @@ DELETE  http://localhost:8000/endereco/"umdoistres"
 DELETE http://localhost:8000/produto/456/
 
 ###
-#Deleção de produto por id incorreta (outro type
+#Deleção de produto por id incorreta (outro type)
 DELETE http://localhost:8000/produto/dois/
+
+###
+#Deleção de carrinho por id
+DELETE http://localhost:8000/produto/456/

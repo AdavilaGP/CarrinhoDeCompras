@@ -14,9 +14,6 @@ class Usuario(BaseModel):
     senha: str
 
 
-from pydantic import BaseModel
-
-
 # Classe representando a lista de endereços de um cliente
 class ListaDeEnderecosDoUsuario(BaseModel):
     usuario: Usuario
